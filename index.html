@@ -306,10 +306,10 @@
 </div>
 
 <script>
-    // ========== 你的 Supabase 配置（已确认正确的值） ==========
+    // ========== 你的 Supabase 信息（已确认） ==========
     const SUPABASE_URL = 'https://beqxeyqmlqvninfpvajy.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_bb0dlSwVanI4JdPKBdr10w_sSYNEeaG';
-    // ============================================================
+    // ===================================================
 
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -344,7 +344,6 @@
         setTimeout(() => t.remove(), 2200);
     }
 
-    // 首页统计
     async function refreshHome() {
         const [orders, devices] = await Promise.all([getOrders(), getDevices()]);
         const pending = orders.filter(o => o.status === 'pending').length;
@@ -365,7 +364,6 @@
         badge.style.display = pending > 0 ? 'flex' : 'none';
     }
 
-    // 工单列表
     async function renderOrders() {
         const orders = await getOrders();
         const filter = document.getElementById('orderFilter').value;
@@ -446,7 +444,6 @@
         refreshAll();
     }
 
-    // 报修
     async function openReportModal() {
         const devs = await getDevices();
         document.getElementById('reportDevice').innerHTML = '<option value="">选择设备</option>' +
@@ -473,7 +470,6 @@
         showToast('报修已提交');
     }
 
-    // 设备管理
     async function renderDevices() {
         const devs = await getDevices();
         const search = document.getElementById('deviceSearch').value.toLowerCase();
@@ -526,7 +522,6 @@
         });
     });
 
-    // 启动：不自动插入演示数据（你已经有一条“测试设备”了）
     (async function() {
         try {
             await refreshAll();
