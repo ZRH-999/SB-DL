@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>设备维修管理系统</title>
-    <!-- 1. 加载 Supabase 客户端 -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
@@ -307,18 +306,21 @@
 </div>
 
 <script>
-    // ========== 2. 配置你的 Supabase ==========
-    const SUPABASE_URL = 'https://beqxeyqmlqvninfpvajy.supabase.co';   // 👈 替换这里
-    const SUPABASE_KEY = 'sb_publishable_bb0dlSwVanI4JdPKBdr10w_sSYNEeaG';                 // 👈 替换这里
-  
+    // ========== 1. 你自己的 Supabase 配置（请替换） ==========
+    const SUPABASE_URL = 'https://beqseyqmlqvninfpvajy.supabase.co';   // 👈 替换成你的 Project URL
+    const SUPABASE_KEY = 'sb_publishable_bb@dlSwVanI4JdPKBdr10w_sSYNE...'; // 👈 替换成你的 anon public key
+    // ============================================================
+    
+    // 使用独立变量名 db，避免与任何其他变量冲突
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // 数据库读取
+    // 数据库操作函数
     async function getDevices() {
-        const { data } = await supabase.from('devices').select('*').order('id');
+        const { data } = await db.from('devices').select('*').order('id');
         return data || [];
     }
     async function getOrders() {
-        const { data } = await supabase.from('orders').select('*').order('created_at', { ascending: false });
+        const { data } = await db.from('orders').select('*').order('created_at', { ascending: false });
         return data || [];
     }
 
@@ -408,20 +410,20 @@
     async function assignOrder(id) {
         const tech = prompt('维修人员姓名：', '王工');
         if (!tech) return;
-        await supabase.from('orders').update({ status: 'processing', assigned_to: tech }).eq('id', id);
+        await db.from('orders').update({ status: 'processing', assigned_to: tech }).eq('id', id);
         showToast('已派工给 ' + tech);
         refreshAll();
     }
     async function completeOrder(id) {
         if (!confirm('确认维修完成？')) return;
-        const { data: ord } = await supabase.from('orders').select('device_id').eq('id', id).single();
-        await supabase.from('orders').update({ status: 'completed', completed_at: new Date().toISOString() }).eq('id', id);
-        if (ord) await supabase.from('devices').update({ status: 'running' }).eq('id', ord.device_id);
+        const { data: ord } = await db.from('orders').select('device_id').eq('id', id).single();
+        await db.from('orders').update({ status: 'completed', completed_at: new Date().toISOString() }).eq('id', id);
+        if (ord) await db.from('devices').update({ status: 'running' }).eq('id', ord.device_id);
         showToast('维修已完成');
         refreshAll();
     }
     async function openOrderDetail(id) {
-        const { data: o } = await supabase.from('orders').select('*').eq('id', id).single();
+        const { data: o } = await db.from('orders').select('*').eq('id', id).single();
         if (!o) return;
         const labels = { pending:'待处理', processing:'维修中', completed:'已完成' };
         document.getElementById('orderDetailContent').innerHTML = `
@@ -463,12 +465,12 @@
         const urgency = document.getElementById('reportUrgency').value;
         const reporter = document.getElementById('reportPerson').value.trim() || '匿名';
         if (!devId || !desc) return showToast('请完善信息');
-        const { data: dev } = await supabase.from('devices').select('name').eq('id', devId).single();
-        await supabase.from('orders').insert({
+        const { data: dev } = await db.from('devices').select('name').eq('id', devId).single();
+        await db.from('orders').insert({
             device_id: devId, device_name: dev?.name || '未知', desc, urgency,
             status: 'pending', reporter, created_at: new Date().toISOString()
         });
-        await supabase.from('devices').update({ status: 'fault' }).eq('id', devId);
+        await db.from('devices').update({ status: 'fault' }).eq('id', devId);
         closeReportModal();
         refreshAll();
         showToast('报修已提交');
@@ -503,7 +505,7 @@
     async function submitDevice() {
         const name = document.getElementById('deviceName').value.trim();
         if (!name) return showToast('请输入设备名称');
-        await supabase.from('devices').insert({
+        await db.from('devices').insert({
             name, code: document.getElementById('deviceCode').value.trim() || 'EQ-'+Date.now(),
             dept: document.getElementById('deviceDept').value, type: document.getElementById('deviceType').value,
             status: 'running', created_at: new Date().toISOString()
@@ -514,7 +516,7 @@
     }
     async function deleteDevice(id) {
         if (!confirm('确定删除？')) return;
-        await supabase.from('devices').delete().eq('id', id);
+        await db.from('devices').delete().eq('id', id);
         refreshAll();
         showToast('已删除');
     }
@@ -528,19 +530,23 @@
         });
     });
 
-    // 启动
+    // 启动：检查数据库并插入演示数据（如果表为空）
     (async function() {
-        await refreshAll();
-        // 如果设备表是空的，自动插入一些演示数据
-        const { count } = await supabase.from('devices').select('*', { count: 'exact', head: true });
-        if (count === 0) {
-            await supabase.from('devices').insert([
-                { name:'数控机床A-01', code:'EQ-001', dept:'生产车间', type:'机械设备', status:'running' },
-                { name:'液压冲床B-03', code:'EQ-002', dept:'生产车间', type:'机械设备', status:'fault' },
-                { name:'光谱分析仪X-7', code:'EQ-003', dept:'质检部', type:'仪器仪表', status:'running' },
-                { name:'电动叉车F-02', code:'EQ-005', dept:'仓库', type:'机械设备', status:'fault' },
-            ]);
-            refreshAll();
+        try {
+            await refreshAll();
+            const { count } = await db.from('devices').select('*', { count: 'exact', head: true });
+            if (count === 0) {
+                await db.from('devices').insert([
+                    { name:'数控机床A-01', code:'EQ-001', dept:'生产车间', type:'机械设备', status:'running' },
+                    { name:'液压冲床B-03', code:'EQ-002', dept:'生产车间', type:'机械设备', status:'fault' },
+                    { name:'光谱分析仪X-7', code:'EQ-003', dept:'质检部', type:'仪器仪表', status:'running' },
+                    { name:'电动叉车F-02', code:'EQ-005', dept:'仓库', type:'机械设备', status:'fault' },
+                ]);
+                await refreshAll();
+            }
+        } catch (err) {
+            console.error('初始化失败，请检查 Supabase 连接和表结构:', err);
+            showToast('数据连接失败，请检查设置');
         }
     })();
 </script>
