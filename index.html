@@ -10,7 +10,7 @@
     <div id="result"></div>
     <script>
         const SUPABASE_URL = 'https://beqxeyqmlqvninfpvajy.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIs...'; // 👈 替换成你刚复制的完整密钥
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlcXhleXFtbHF2bmluZnB2YWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0NDc3MzQsImV4cCI6MjA5NDAyMzczNH0.25dZLSTu5jvmTB4Tx5XEIoAPMOwaUeoKriRJupSGxBk'; // 👈 替换成你刚复制的完整密钥
         const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         async function test() {
             const { data, error } = await db.from('devices').select('*');
