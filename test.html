@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>密钥验证</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h2>密钥验证</h2>
+    <div id="result"></div>
+    <script>
+        // ============================================================
+        // ！！！ 只改这一处：把下面引号里的内容换成你 Supabase 的
+        //     “可发布密钥”(Publishable Key)，其他什么都别动 ！！！
+        // ============================================================
+        const SUPABASE_URL = 'https://beqxeyqmlqvninfpvajy.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_bb0dlSwVanI4JdPKBdr10w_sSYNEeaG';
+        // ============================================================
+
+        // 显示你当前填的密钥前10位，方便你肉眼比对
+        document.getElementById('result').innerHTML =
+            '<p>当前使用的密钥 (前10位): <b>' + SUPABASE_KEY.substring(0, 10) + '...</b></p>';
+
+        const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        async function test() {
+            const { data, error } = await db.from('devices').select('*');
+            if (error) {
+                document.getElementById('result').innerHTML +=
+                    '<p style="color:red;">❌ 错误: ' + error.message + '</p>';
+                document.getElementById('result').innerHTML +=
+                    '<p>如果提示 Invalid API key，说明上面的密钥不对。</p>';
+            } else {
+                document.getElementById('result').innerHTML +=
+                    '<p style="color:green;">✅ 连接成功！共 ' + data.length + ' 条设备</p>';
+            }
+        }
+        test();
+    </script>
+</body>
+</html>
