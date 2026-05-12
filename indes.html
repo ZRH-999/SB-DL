@@ -171,7 +171,6 @@
         </div>
     </div>
 
-    <!-- 弹窗 -->
     <div class="modal" id="reportModal" style="display:none;">
         <div class="modal-content">
             <div class="modal-title">📝 设备报修</div>
@@ -193,8 +192,10 @@
     <div class="modal" id="detailModal" style="display:none;"><div class="modal-content" id="detailContent"></div></div>
 
     <script>
-        const SUPABASE_URL = 'https://lkiftvviiutercdspnua.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_XVjCju0TZKvwSkAmRsSBCw_BfYxXdO2';
+        // ====== 你的 Supabase 信息（已更新密钥） ======
+        const SUPABASE_URL = 'https://beqxeyqmlqvninfpvajy.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlcXhleXFtbHF2bmluZnB2YWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0NDc3MzQsImV4cCI6MjA5NDAyMzczNH0.25dZLSTu5jvmTB4Tx5XEIoAPMOwaUeoKriRJupSGxBk';
+        // ================================================
         const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         let devices = [];
