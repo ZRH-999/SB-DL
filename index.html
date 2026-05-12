@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>设备维修管理系统 · 桌面版</title>
+    <title>设备维修管理系统</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
@@ -193,8 +193,10 @@
     <div class="modal" id="detailModal" style="display:none;"><div class="modal-content" id="detailContent"></div></div>
 
     <script>
-        const SUPABASE_URL = 'https://lkiftvviiutercdspnua.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_XVjCju0TZKvwSkAmRsSBCw_BfYxXdO2';
+        // ========== 正确的 Supabase 配置 ==========
+        const SUPABASE_URL = 'https://beqxeyqmlqvninfpvajy.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlcXhleXFtbHF2bmluZnB2YWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0NDc3MzQsImV4cCI6MjA5NDAyMzczNH0.25dZLSTu5jvmTB4Tx5XEIoAPMOwaUeoKriRJupSGxBk';
+        // ============================================
         const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         let devices = [];
