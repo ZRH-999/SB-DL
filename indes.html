@@ -25,85 +25,31 @@
             padding: 20px;
         }
         .phone {
-            width: 420px;
-            max-width: 100%;
-            background: #fff;
-            border-radius: 28px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 780px;
+            width: 420px; max-width: 100%; background: #fff;
+            border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            overflow: hidden; display: flex; flex-direction: column; height: 780px;
         }
-        .header {
-            background: var(--primary);
-            color: #fff;
-            padding: 16px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        .pages {
-            flex: 1;
-            overflow-y: auto;
-            background: var(--bg);
-            padding: 14px;
-        }
+        .header { background: var(--primary); color: #fff; padding: 16px; text-align: center; font-size: 18px; font-weight: 600; }
+        .pages { flex: 1; overflow-y: auto; background: var(--bg); padding: 14px; }
         .page { display: none; }
         .page.active { display: block; }
-        .nav {
-            display: flex;
-            background: #fff;
-            border-top: 1px solid #eee;
-            height: 60px;
-        }
+        .nav { display: flex; background: #fff; border-top: 1px solid #eee; height: 60px; }
         .nav-item {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #999;
-            font-size: 11px;
-            transition: 0.2s;
-            position: relative;
+            flex: 1; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; cursor: pointer; color: #999; font-size: 11px; position: relative;
         }
         .nav-item.active { color: var(--primary); font-weight: 600; }
         .nav-item .icon { font-size: 22px; margin-bottom: 2px; }
         .nav-item .badge {
-            position: absolute;
-            background: var(--danger);
-            color: #fff;
-            font-size: 10px;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            top: 4px;
-            margin-left: 22px;
+            position: absolute; background: var(--danger); color: #fff; font-size: 10px;
+            min-width: 18px; height: 18px; border-radius: 9px; display: flex; align-items: center;
+            justify-content: center; top: 4px; margin-left: 22px;
         }
-        .card {
-            background: #fff;
-            border-radius: var(--radius);
-            padding: 14px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
+        .card { background: #fff; border-radius: var(--radius); padding: 14px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .alert-box {
-            background: #fff1f0;
-            border: 2px solid var(--danger);
-            border-radius: var(--radius);
-            padding: 14px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            animation: pulse 1.5s infinite;
+            background: #fff1f0; border: 2px solid var(--danger); border-radius: var(--radius);
+            padding: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+            cursor: pointer; animation: pulse 1.5s infinite;
         }
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(245,34,45,0.4); }
@@ -111,197 +57,85 @@
             100% { box-shadow: 0 0 0 0 rgba(245,34,45,0); }
         }
         .alert-box .alert-num { font-size: 24px; font-weight: 700; color: var(--danger); }
-        .stats-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        .stat-card {
-            background: #fff;
-            border-radius: var(--radius);
-            padding: 14px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            cursor: pointer;
-        }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .stat-card { background: #fff; border-radius: var(--radius); padding: 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; }
         .stat-num { font-size: 28px; font-weight: 700; color: var(--primary); }
         .stat-label { font-size: 12px; color: #888; margin-top: 2px; }
-        .btn {
-            padding: 10px 18px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
+        .btn { padding: 10px 18px; border: none; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: 600; }
         .btn-primary { background: var(--primary); color: #fff; }
         .btn-success { background: var(--success); color: #fff; }
         .btn-outline { background: #fff; color: var(--primary); border: 1.5px solid var(--primary); }
         .btn-block { display: block; width: 100%; margin-top: 8px; }
         .btn-sm { padding: 5px 12px; font-size: 11px; }
-        .tag {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-        }
+        .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
         .tag-pending { background: #fff7e6; color: #d48806; }
         .tag-processing { background: #e6f7ff; color: #1890ff; }
         .tag-completed { background: #f0fff4; color: #389e0d; }
         .tag-urgent { background: #fff1f0; color: #cf1322; }
         .tag-overtime { background: #ff4d4f; color: #fff; }
         .order-card {
-            background: #fff;
-            border-radius: var(--radius);
-            padding: 14px;
-            margin-bottom: 8px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-            cursor: pointer;
-            border-left: 4px solid transparent;
+            background: #fff; border-radius: var(--radius); padding: 14px; margin-bottom: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer; border-left: 4px solid transparent;
         }
         .order-card.pending { border-left-color: var(--warning); }
         .order-card.processing { border-left-color: var(--primary); }
         .order-card.completed { border-left-color: var(--success); }
         .order-card.overtime { border-left-color: var(--danger); background: #fff1f0; }
-        .order-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .order-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
         .order-row .code { color: #888; font-size: 12px; }
-        .order-row .name { font-weight: 600; font-size: 14px; flex: 1; }
+        .order-row .name { font-weight: 600; font-size: 14px; }
         .order-meta { font-size: 12px; color: #888; margin-top: 4px; }
         .order-actions { display: flex; gap: 6px; margin-top: 8px; }
         .device-card {
-            display: flex;
-            align-items: center;
-            padding: 14px;
-            background: #fff;
-            border-radius: var(--radius);
-            margin-bottom: 8px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-            gap: 12px;
+            display: flex; align-items: center; padding: 14px; background: #fff;
+            border-radius: var(--radius); margin-bottom: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); gap: 12px;
         }
         .device-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #fff;
-            flex-shrink: 0;
+            width: 40px; height: 40px; border-radius: 10px; display: flex;
+            align-items: center; justify-content: center; font-size: 20px; color: #fff; flex-shrink: 0;
         }
-        .search-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
+        .search-bar { display: flex; gap: 8px; margin-bottom: 12px; }
         .search-input {
-            flex: 1;
-            padding: 10px 14px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 22px;
-            font-size: 14px;
-            background: #fff;
-            outline: none;
+            flex: 1; padding: 10px 14px; border: 1.5px solid #e0e0e0;
+            border-radius: 22px; font-size: 14px; background: #fff; outline: none;
         }
         .search-input:focus { border-color: var(--primary); }
         .form-select {
-            padding: 10px 14px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            background: #fff;
-            outline: none;
-            width: 100%;
-            margin-bottom: 10px;
+            padding: 10px 14px; border: 1.5px solid #e0e0e0; border-radius: 8px;
+            font-size: 14px; background: #fff; outline: none; width: 100%; margin-bottom: 10px;
         }
         .modal {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            z-index: 100;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); display: flex; align-items: flex-end; justify-content: center; z-index: 100;
         }
         .modal-content {
-            background: #fff;
-            width: 100%;
-            max-height: 75%;
-            border-radius: 20px 20px 0 0;
-            padding: 20px 18px 30px;
-            overflow-y: auto;
+            background: #fff; width: 100%; max-height: 75%; border-radius: 20px 20px 0 0;
+            padding: 20px 18px 30px; overflow-y: auto;
         }
-        .modal-handle {
-            width: 36px; height: 5px;
-            background: #ddd;
-            border-radius: 3px;
-            margin: 0 auto 18px;
-        }
-        .modal-title {
-            font-size: 18px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 16px;
-        }
+        .modal-handle { width: 36px; height: 5px; background: #ddd; border-radius: 3px; margin: 0 auto 18px; }
+        .modal-title { font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 16px; }
         .form-input, .form-textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            margin-bottom: 10px;
-            background: #fafafa;
-            outline: none;
+            width: 100%; padding: 10px 14px; border: 1.5px solid #e0e0e0;
+            border-radius: 8px; font-size: 14px; margin-bottom: 10px; background: #fafafa; outline: none;
         }
         .form-input:focus, .form-textarea:focus { border-color: var(--primary); }
-        .form-label {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 6px;
-            color: #333;
-            display: block;
-        }
+        .form-label { font-weight: 600; font-size: 14px; margin-bottom: 6px; color: #333; display: block; }
         .toast {
-            position: absolute;
-            top: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 20px;
-            font-size: 14px;
-            z-index: 200;
-            pointer-events: none;
-            animation: toastAnim 0.3s ease;
+            position: absolute; top: 70px; left: 50%; transform: translateX(-50%);
+            background: #333; color: #fff; padding: 10px 24px; border-radius: 20px;
+            font-size: 14px; z-index: 200; pointer-events: none; animation: toastAnim 0.3s ease;
         }
         @keyframes toastAnim {
             from { opacity: 0; transform: translateX(-50%) translateY(-15px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         .dropdown-list {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 0 0 8px 8px;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 10;
-            display: none;
+            position: absolute; top: 100%; left: 0; right: 0; background: #fff;
+            border: 1px solid #ddd; border-radius: 0 0 8px 8px; max-height: 200px;
+            overflow-y: auto; z-index: 10; display: none;
         }
         .dropdown-list.show { display: block; }
-        .dropdown-item {
-            padding: 10px 14px;
-            cursor: pointer;
-            font-size: 14px;
-            border-bottom: 1px solid #f0f0f0;
-        }
+        .dropdown-item { padding: 10px 14px; cursor: pointer; font-size: 14px; border-bottom: 1px solid #f0f0f0; }
         .dropdown-item:hover { background: #f0f5ff; }
         .search-dropdown { position: relative; }
         table { width: 100%; border-collapse: collapse; font-size: 11px; }
@@ -314,7 +148,6 @@
 <div class="phone" id="app">
     <div class="header">🏭 设备维修管理</div>
     <div class="pages">
-        <!-- 首页 -->
         <div class="page active" id="page0">
             <div class="alert-box" id="alertBox" style="display:none;" onclick="switchTab(1)">
                 <span style="font-size:28px;">⚠️</span>
@@ -337,7 +170,6 @@
             </div>
             <button class="btn btn-primary btn-block" onclick="openReportModal()">📝 快速报修</button>
         </div>
-        <!-- 工单页 -->
         <div class="page" id="page1">
             <div class="search-bar">
                 <input class="search-input" placeholder="🔍 搜索工单..." id="orderSearch" oninput="renderOrders()">
@@ -350,7 +182,6 @@
             </div>
             <div id="orderList"></div>
         </div>
-        <!-- 设备页 -->
         <div class="page" id="page2">
             <div class="search-bar">
                 <input class="search-input" placeholder="🔍 搜索设备..." id="deviceSearch" oninput="renderDevices()">
@@ -358,7 +189,6 @@
             </div>
             <div id="deviceList"></div>
         </div>
-        <!-- 报表页 -->
         <div class="page" id="page3">
             <div class="card"><strong>🔧 设备故障次数排名</strong><div id="rptFaults" style="margin-top:8px;"></div></div>
             <div class="card"><strong>📅 近7天工单趋势</strong><div id="rptDaily" style="margin-top:8px;"></div></div>
@@ -371,31 +201,27 @@
     </div>
     <div class="nav">
         <div class="nav-item active" onclick="switchTab(0)"><span class="icon">📊</span><span>首页</span></div>
-        <div class="nav-item" onclick="switchTab(1)"><span class="icon">📋</span><span>工单</span><span class="badge" id="badgePending" style="display:none;">0</span></div>
+        <div class="nav-item" onclick="switchTab(1)"><span class="icon">📋</span><span>工单</span><span class="badge" id="badgePending">0</span></div>
         <div class="nav-item" onclick="switchTab(2)"><span class="icon">🖥️</span><span>设备</span></div>
         <div class="nav-item" onclick="switchTab(3)"><span class="icon">📈</span><span>报表</span></div>
     </div>
 </div>
 
-<!-- 报修弹窗 -->
 <div class="modal" id="reportModal" style="display:none;">
     <div class="modal-content">
         <div class="modal-handle"></div>
         <div class="modal-title">📝 设备报修</div>
-        
         <label class="form-label">工单类型</label>
         <select class="form-select" id="repOrderType">
             <option value="repair">设备维修</option>
             <option value="mold_change">修模换款</option>
         </select>
-
         <label class="form-label">选择设备</label>
         <div class="search-dropdown">
-            <input type="text" class="form-input" id="repDeviceSearch" placeholder="🔍 输入编号或名称搜索设备..." autocomplete="off" oninput="filterDeviceList()" onfocus="showDeviceDropdown()">
+            <input type="text" class="form-input" id="repDeviceSearch" placeholder="🔍 输入编号或名称搜索..." autocomplete="off" oninput="filterDeviceList()" onfocus="showDeviceDropdown()">
             <input type="hidden" id="repDeviceCode">
             <div class="dropdown-list" id="deviceDropdown"></div>
         </div>
-
         <textarea class="form-textarea" id="repDesc" placeholder="详细描述故障现象..." rows="3"></textarea>
         <input class="form-input" id="repPerson" placeholder="报修人姓名">
         <div style="display:flex;gap:10px;">
@@ -404,7 +230,6 @@
         </div>
     </div>
 </div>
-<!-- 设备添加弹窗 -->
 <div class="modal" id="deviceModal" style="display:none;">
     <div class="modal-content">
         <div class="modal-handle"></div>
@@ -419,7 +244,6 @@
         </div>
     </div>
 </div>
-<!-- 工单详情弹窗 -->
 <div class="modal" id="detailModal" style="display:none;">
     <div class="modal-content" id="detailContent"></div>
 </div>
@@ -428,241 +252,183 @@
     const SUPABASE_URL = 'https://beqxeyqmlqvninfpvajy.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlcXhleXFtbHF2bmluZnB2YWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0NDc3MzQsImV4cCI6MjA5NDAyMzczNH0.25dZLSTu5jvmTB4Tx5XEIoAPMOwaUeoKriRJupSGxBk';
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    let devices = [], orders = [];
 
-    let devices = [];
-    let orders = [];
+    async function loadDevices() { const { data } = await db.from('devices').select('*').order('id'); devices = data || []; }
+    async function loadOrders() { const { data } = await db.from('orders').select('*').order('created_at',{ascending:false}); orders = data || []; }
 
-    async function loadDevices() {
-        const { data } = await db.from('devices').select('*').order('id');
-        devices = data || [];
-    }
-    async function loadOrders() {
-        const { data } = await db.from('orders').select('*').order('created_at', { ascending: false });
-        orders = data || [];
-    }
-
-    const OVERTIME_MS = 2 * 60 * 60 * 1000;
-    function isOvertime(o) { return o.status === 'pending' && (Date.now() - new Date(o.created_at).getTime() > OVERTIME_MS); }
+    const OVERTIME_MS = 2*60*60*1000;
+    function isOvertime(o) { return o.status==='pending' && (Date.now()-new Date(o.created_at).getTime() > OVERTIME_MS); }
 
     function switchTab(idx) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
         document.getElementById('page'+idx).classList.add('active');
         document.querySelectorAll('.nav-item')[idx].classList.add('active');
-        if (idx === 0) refreshHome();
-        else if (idx === 1) renderOrders();
-        else if (idx === 2) renderDevices();
-        else if (idx === 3) renderReports();
+        if(idx===0) refreshHome(); else if(idx===1) renderOrders(); else if(idx===2) renderDevices(); else if(idx===3) renderReports();
     }
 
     function showToast(msg) {
-        const old = document.querySelector('.toast');
-        if (old) old.remove();
-        const t = document.createElement('div');
-        t.className = 'toast';
-        t.textContent = msg;
-        document.getElementById('app').appendChild(t);
-        setTimeout(() => t.remove(), 2000);
+        const old = document.querySelector('.toast'); if(old) old.remove();
+        const t = document.createElement('div'); t.className='toast'; t.textContent=msg;
+        document.getElementById('app').appendChild(t); setTimeout(()=>t.remove(),2000);
     }
-
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    function closeModal(id) { document.getElementById(id).style.display='none'; }
 
     async function refreshHome() {
         await loadOrders();
-        document.getElementById('sPending').textContent = orders.filter(o => o.status === 'pending').length;
-        document.getElementById('sProcessing').textContent = orders.filter(o => o.status === 'processing').length;
-        document.getElementById('sCompleted').textContent = orders.filter(o => o.status === 'completed').length;
+        document.getElementById('sPending').textContent = orders.filter(o=>o.status==='pending').length;
+        document.getElementById('sProcessing').textContent = orders.filter(o=>o.status==='processing').length;
+        document.getElementById('sCompleted').textContent = orders.filter(o=>o.status==='completed').length;
         document.getElementById('sDevices').textContent = devices.length;
-        document.getElementById('urgentCount').textContent = orders.filter(o => o.urgency === 'urgent' && o.status !== 'completed').length;
         const today = new Date().toISOString().split('T')[0];
-        document.getElementById('todayNew').textContent = orders.filter(o => o.created_at?.startsWith(today)).length;
-        document.getElementById('todayDone').textContent = orders.filter(o => o.completed_at?.startsWith(today)).length;
+        document.getElementById('todayNew').textContent = orders.filter(o=>o.created_at?.startsWith(today)).length;
+        document.getElementById('todayDone').textContent = orders.filter(o=>o.completed_at?.startsWith(today)).length;
         const badge = document.getElementById('badgePending');
-        const pendingCount = orders.filter(o => o.status === 'pending').length;
-        badge.textContent = pendingCount;
-        badge.style.display = pendingCount > 0 ? 'flex' : 'none';
-        const overtime = orders.filter(o => isOvertime(o)).length;
-        document.getElementById('alertBox').style.display = overtime > 0 ? 'flex' : 'none';
-        document.getElementById('alertCount').textContent = overtime;
+        const pc = orders.filter(o=>o.status==='pending').length;
+        badge.textContent = pc; badge.style.display = pc>0?'flex':'none';
+        const ot = orders.filter(o=>isOvertime(o)).length;
+        document.getElementById('alertBox').style.display = ot>0?'flex':'none';
+        document.getElementById('alertCount').textContent = ot;
     }
 
     async function renderOrders() {
         await loadOrders();
         const filter = document.getElementById('orderFilter').value;
         const search = document.getElementById('orderSearch').value.toLowerCase();
-        let list = orders.filter(o => (filter === 'all' || o.status === filter) && 
-            ((o.device_name||'').toLowerCase().includes(search) || (o.device_code||'').toLowerCase().includes(search) || (o.desc||'').toLowerCase().includes(search) || (o.reporter||'').includes(search) || (o.device_dept||'').includes(search)));
+        let list = orders.filter(o=>(filter==='all'||o.status===filter)&&((o.device_name||'').toLowerCase().includes(search)||(o.device_code||'').toLowerCase().includes(search)||(o.desc||'').toLowerCase().includes(search)||(o.reporter||'').includes(search)));
         const container = document.getElementById('orderList');
-        if (list.length === 0) {
-            container.innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">暂无工单</div>';
-            return;
-        }
-        container.innerHTML = list.map(o => {
-            const labels = { pending:'待处理', processing:'维修中', completed:'已完成' };
-            const otTag = isOvertime(o) ? '<span class="tag tag-overtime">⚠️ 超时</span>' : '';
-            const typeLabel = o.order_type === 'mold_change' ? '修模换款' : '设备维修';
-            const typeTag = `<span class="tag ${o.order_type==='mold_change'?'tag-processing':'tag-urgent'}">${typeLabel}</span>`;
-            const btn = o.status === 'pending' ? `<button class="btn btn-primary btn-sm" onclick="event.stopPropagation();assignOrder('${o.id}')">派工</button>` : o.status === 'processing' ? `<button class="btn btn-success btn-sm" onclick="event.stopPropagation();completeOrder('${o.id}')">完工</button>` : '';
+        if(!list.length){container.innerHTML='<div style="text-align:center;padding:40px;color:#aaa;">暂无工单</div>';return;}
+        container.innerHTML = list.map(o=>{
+            const labels={pending:'待处理',processing:'维修中',completed:'已完成'};
+            const otTag=isOvertime(o)?'<span class="tag tag-overtime">⚠️超时</span>':'';
+            const typeLabel=o.order_type==='mold_change'?'修模换款':'设备维修';
+            const typeTag=`<span class="tag ${o.order_type==='mold_change'?'tag-processing':'tag-urgent'}">${typeLabel}</span>`;
+            const btn=o.status==='pending'?`<button class="btn btn-primary btn-sm" onclick="event.stopPropagation();assignOrder('${o.id}')">派工</button>`:o.status==='processing'?`<button class="btn btn-success btn-sm" onclick="event.stopPropagation();completeOrder('${o.id}')">完工</button>`:'';
             return `<div class="order-card ${o.status}${isOvertime(o)?' overtime':''}" onclick="openDetail('${o.id}')">
-                <div class="order-row">
-                    <span class="tag tag-${o.status}">${labels[o.status]}</span>
-                    ${typeTag}
-                    <span class="code">${o.device_code||''}</span>
-                    <span class="name">${o.device_name} ${otTag}</span>
-                </div>
+                <div class="order-row"><span class="tag tag-${o.status}">${labels[o.status]}</span>${typeTag}<span class="code">${o.device_code||''}</span><span class="name">${o.device_name} ${otTag}</span></div>
                 <div class="order-meta">📝 ${(o.desc||'').substring(0,25)}</div>
                 <div class="order-meta">👤 ${o.reporter||''} ${o.assigned_to?'→ 🔧 '+o.assigned_to:''}</div>
-                <div class="order-meta">🕐 建立: ${new Date(o.created_at).toLocaleString()} ${o.dispatched_at?'| 派工: '+new Date(o.dispatched_at).toLocaleString():''} ${o.completed_at?'| 完工: '+new Date(o.completed_at).toLocaleString():''}</div>
+                <div class="order-meta">🕐 ${new Date(o.created_at).toLocaleString()} ${o.dispatched_at?'| 派工:'+new Date(o.dispatched_at).toLocaleString():''} ${o.completed_at?'| 完工:'+new Date(o.completed_at).toLocaleString():''}</div>
                 <div class="order-actions">${btn}</div>
             </div>`;
         }).join('');
     }
 
     async function assignOrder(id) {
-        const tech = prompt('维修人员姓名：', '王工');
-        if (!tech) return;
-        await db.from('orders').update({ status:'processing', assigned_to:tech, dispatched_at:new Date().toISOString() }).eq('id', id);
+        const tech=prompt('维修人员姓名：','王工'); if(!tech) return;
+        await db.from('orders').update({status:'processing',assigned_to:tech,dispatched_at:new Date().toISOString()}).eq('id',id);
         showToast('已派工给 '+tech); refreshAll();
     }
     async function completeOrder(id) {
-        if (!confirm('确认维修完成？')) return;
-        const { data: ord } = await db.from('orders').select('device_id').eq('id', id).single();
-        await db.from('orders').update({ status:'completed', completed_at:new Date().toISOString() }).eq('id', id);
-        if (ord) await db.from('devices').update({ status:'running' }).eq('id', ord.device_id);
+        if(!confirm('确认维修完成？')) return;
+        const {data:ord}=await db.from('orders').select('device_id').eq('id',id).single();
+        await db.from('orders').update({status:'completed',completed_at:new Date().toISOString()}).eq('id',id);
+        if(ord) await db.from('devices').update({status:'running'}).eq('id',ord.device_id);
         showToast('维修已完成'); refreshAll();
     }
     async function openDetail(id) {
-        const { data: o } = await db.from('orders').select('*').eq('id', id).single();
-        if (!o) return;
-        const labels = { pending:'待处理', processing:'维修中', completed:'已完成' };
-        const typeLabel = o.order_type === 'mold_change' ? '修模换款' : '设备维修';
-        document.getElementById('detailContent').innerHTML = `
-            <div class="modal-handle"></div>
-            <div class="modal-title">📋 工单详情</div>
-            <p><b>工单类型：</b>${typeLabel}</p>
-            <p><b>编号：</b>${o.device_code||'无'}</p>
-            <p><b>部门：</b>${o.device_dept||'未指定'}</p>
-            <p><b>设备：</b>${o.device_name}</p>
-            <p><b>描述：</b>${o.desc}</p>
-            <p><b>报修人：</b>${o.reporter}</p>
+        const {data:o}=await db.from('orders').select('*').eq('id',id).single(); if(!o) return;
+        const labels={pending:'待处理',processing:'维修中',completed:'已完成'};
+        const typeLabel=o.order_type==='mold_change'?'修模换款':'设备维修';
+        document.getElementById('detailContent').innerHTML=`
+            <div class="modal-handle"></div><div class="modal-title">📋 工单详情</div>
+            <p><b>工单类型：</b>${typeLabel}</p><p><b>编号：</b>${o.device_code||'无'}</p>
+            <p><b>部门：</b>${o.device_dept||'未指定'}</p><p><b>设备：</b>${o.device_name}</p>
+            <p><b>描述：</b>${o.desc}</p><p><b>报修人：</b>${o.reporter}</p>
             <p><b>维修人：</b>${o.assigned_to||'未分配'}</p>
             <p><b>建立时间：</b>${new Date(o.created_at).toLocaleString()}</p>
             <p><b>派工时间：</b>${o.dispatched_at?new Date(o.dispatched_at).toLocaleString():'未派工'}</p>
             <p><b>完工时间：</b>${o.completed_at?new Date(o.completed_at).toLocaleString():'未完工'}</p>
             <div style="display:flex;gap:10px;margin-top:12px;">
-                ${o.status==='pending'?`<button class="btn btn-primary" style="flex:1;" onclick="assignOrder('${o.id}');closeModal('detailModal')">🔧 派工</button>`:''}
-                ${o.status==='processing'?`<button class="btn btn-success" style="flex:1;" onclick="completeOrder('${o.id}');closeModal('detailModal')">✅ 完工</button>`:''}
+                ${o.status==='pending'?`<button class="btn btn-primary" style="flex:1;" onclick="assignOrder('${o.id}');closeModal('detailModal')">🔧派工</button>`:''}
+                ${o.status==='processing'?`<button class="btn btn-success" style="flex:1;" onclick="completeOrder('${o.id}');closeModal('detailModal')">✅完工</button>`:''}
                 <button class="btn btn-outline" style="flex:1;" onclick="closeModal('detailModal')">关闭</button>
             </div>`;
-        document.getElementById('detailModal').style.display = 'flex';
+        document.getElementById('detailModal').style.display='flex';
     }
 
     async function openReportModal() {
         await loadDevices();
-        document.getElementById('repOrderType').value = 'repair';
-        document.getElementById('repDeviceSearch').value = '';
-        document.getElementById('repDeviceCode').value = '';
-        document.getElementById('repDesc').value = '';
-        document.getElementById('repPerson').value = '';
-        document.getElementById('reportModal').style.display = 'flex';
-        filterDeviceList();
+        document.getElementById('repOrderType').value='repair';
+        document.getElementById('repDeviceSearch').value=''; document.getElementById('repDeviceCode').value='';
+        document.getElementById('repDesc').value=''; document.getElementById('repPerson').value='';
+        document.getElementById('reportModal').style.display='flex'; filterDeviceList();
     }
     function filterDeviceList() {
-        const search = document.getElementById('repDeviceSearch').value.toLowerCase();
-        const filtered = devices.filter(d => (d.code||'').toLowerCase().includes(search) || (d.name||'').toLowerCase().includes(search) || (d.dept||'').toLowerCase().includes(search));
-        const dropdown = document.getElementById('deviceDropdown');
-        dropdown.innerHTML = filtered.length ? filtered.map(d => `<div class="dropdown-item" onclick="selectDevice('${d.code}','${d.name}','${d.dept}')"><strong>${d.code}</strong> - ${d.name} (${d.dept})</div>`).join('') : '<div class="dropdown-item" style="color:#999;">未找到匹配设备</div>';
-        dropdown.classList.add('show');
+        const s=document.getElementById('repDeviceSearch').value.toLowerCase();
+        const filtered=devices.filter(d=>(d.code||'').toLowerCase().includes(s)||(d.name||'').toLowerCase().includes(s)||(d.dept||'').toLowerCase().includes(s));
+        const dd=document.getElementById('deviceDropdown');
+        dd.innerHTML=filtered.length?filtered.map(d=>`<div class="dropdown-item" onclick="selectDevice('${d.code}','${d.name}','${d.dept}')"><strong>${d.code}</strong> - ${d.name} (${d.dept})</div>`).join(''):'<div class="dropdown-item" style="color:#999;">未找到匹配设备</div>';
+        dd.classList.add('show');
     }
-    function selectDevice(code, name, dept) {
-        document.getElementById('repDeviceSearch').value = `${code} - ${name} (${dept})`;
-        document.getElementById('repDeviceCode').value = code;
+    function selectDevice(code,name,dept) {
+        document.getElementById('repDeviceSearch').value=`${code} - ${name} (${dept})`;
+        document.getElementById('repDeviceCode').value=code;
         document.getElementById('deviceDropdown').classList.remove('show');
     }
-    function showDeviceDropdown() { filterDeviceList(); }
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.search-dropdown')) document.getElementById('deviceDropdown').classList.remove('show');
-    });
+    function showDeviceDropdown(){filterDeviceList();}
+    document.addEventListener('click',function(e){if(!e.target.closest('.search-dropdown'))document.getElementById('deviceDropdown').classList.remove('show');});
     async function submitReport() {
-        const orderType = document.getElementById('repOrderType').value;
-        const devCode = document.getElementById('repDeviceCode').value;
-        const desc = document.getElementById('repDesc').value.trim();
-        const reporter = document.getElementById('repPerson').value.trim() || '匿名';
-        if (!devCode || !desc) return showToast('请完善信息');
-        const dev = devices.find(d => d.code === devCode);
-        if (!dev) return showToast('未找到该设备');
-        await db.from('orders').insert({ 
-            device_id:dev.id, device_name:dev.name, device_code:dev.code, device_dept:dev.dept, 
-            desc, order_type: orderType, status:'pending', reporter, created_at:new Date().toISOString() 
-        });
-        await db.from('devices').update({ status:'fault' }).eq('id', dev.id);
+        const orderType=document.getElementById('repOrderType').value;
+        const devCode=document.getElementById('repDeviceCode').value;
+        const desc=document.getElementById('repDesc').value.trim();
+        const reporter=document.getElementById('repPerson').value.trim()||'匿名';
+        if(!devCode||!desc) return showToast('请完善信息');
+        const dev=devices.find(d=>d.code===devCode); if(!dev) return showToast('未找到该设备');
+        await db.from('orders').insert({device_id:dev.id,device_name:dev.name,device_code:dev.code,device_dept:dev.dept,desc,order_type:orderType,status:'pending',reporter,created_at:new Date().toISOString()});
+        await db.from('devices').update({status:'fault'}).eq('id',dev.id);
         closeModal('reportModal'); refreshAll(); showToast('报修已提交');
     }
 
     async function renderDevices() {
         await loadDevices();
-        const search = document.getElementById('deviceSearch').value.toLowerCase();
-        const list = devices.filter(d => (d.name||'').toLowerCase().includes(search) || (d.code||'').toLowerCase().includes(search));
-        const container = document.getElementById('deviceList');
-        if (list.length === 0) { container.innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">暂无设备</div>'; return; }
-        const colors = { '机械设备':'#e67e22','电气设备':'#3498db','仪器仪表':'#9b59b6','IT设备':'#2ecc71','其他':'#95a5a6' };
-        const icons = { '机械设备':'⚙️','电气设备':'⚡','仪器仪表':'🔬','IT设备':'💻','其他':'📦' };
-        container.innerHTML = list.map(d => `<div class="device-card"><div class="device-icon" style="background:${colors[d.type]||'#888'}">${icons[d.type]||'📦'}</div><div style="flex:1;"><strong>${d.code}</strong> ${d.name}<div style="font-size:12px;color:#888;">${d.dept} · ${d.type}</div></div><span class="tag ${d.status==='fault'?'tag-urgent':'tag-processing'}">${d.status==='fault'?'故障':'正常'}</span></div>`).join('');
+        const s=document.getElementById('deviceSearch').value.toLowerCase();
+        const list=devices.filter(d=>(d.name||'').toLowerCase().includes(s)||(d.code||'').toLowerCase().includes(s));
+        const container=document.getElementById('deviceList');
+        if(!list.length){container.innerHTML='<div style="text-align:center;padding:40px;color:#aaa;">暂无设备</div>';return;}
+        const colors={'机械设备':'#e67e22','电气设备':'#3498db','仪器仪表':'#9b59b6','IT设备':'#2ecc71','其他':'#95a5a6'};
+        const icons={'机械设备':'⚙️','电气设备':'⚡','仪器仪表':'🔬','IT设备':'💻','其他':'📦'};
+        container.innerHTML=list.map(d=>`<div class="device-card"><div class="device-icon" style="background:${colors[d.type]||'#888'}">${icons[d.type]||'📦'}</div><div style="flex:1;"><strong>${d.code}</strong> ${d.name}<div style="font-size:12px;color:#888;">${d.dept} · ${d.type}</div></div><span class="tag ${d.status==='fault'?'tag-urgent':'tag-processing'}">${d.status==='fault'?'故障':'正常'}</span></div>`).join('');
     }
-    function openDeviceModal() { document.getElementById('deviceModal').style.display = 'flex'; }
+    function openDeviceModal(){document.getElementById('deviceModal').style.display='flex';}
     async function submitDevice() {
-        const name = document.getElementById('devName').value.trim();
-        if (!name) return showToast('请输入设备名称');
-        await db.from('devices').insert({ name, code:document.getElementById('devCode').value.trim()||'EQ-'+Date.now(), dept:document.getElementById('devDept').value, type:document.getElementById('devType').value, status:'running' });
+        const name=document.getElementById('devName').value.trim(); if(!name) return showToast('请输入设备名称');
+        await db.from('devices').insert({name,code:document.getElementById('devCode').value.trim()||'EQ-'+Date.now(),dept:document.getElementById('devDept').value,type:document.getElementById('devType').value,status:'running'});
         closeModal('deviceModal'); refreshAll(); showToast('设备已添加');
     }
 
     async function renderReports() {
         await loadOrders(); await loadDevices();
-        const faultCount = {}; orders.forEach(o => { if (o.status !== 'completed') faultCount[o.device_id] = (faultCount[o.device_id]||0)+1; });
-        let html = '<table><tr><th>编号</th><th>设备</th><th>次数</th></tr>';
-        devices.forEach(d => { const cnt = faultCount[d.id]||0; html += `<tr><td>${d.code}</td><td>${d.name}</td><td>${cnt}</td></tr>`; });
-        document.getElementById('rptFaults').innerHTML = html + '</table>';
+        const faultCount={}; orders.forEach(o=>{if(o.status!=='completed')faultCount[o.device_id]=(faultCount[o.device_id]||0)+1;});
+        let html='<table><tr><th>编号</th><th>设备名称</th><th>部门</th><th>故障次数</th></tr>';
+        devices.forEach(d=>{const cnt=faultCount[d.id]||0; html+=`<tr><td>${d.code}</td><td>${d.name}</td><td>${d.dept||''}</td><td>${cnt}</td></tr>`;});
+        document.getElementById('rptFaults').innerHTML=html+'</table>';
 
-        const dates = []; for (let i=6;i>=0;i--) { const d=new Date(); d.setDate(d.getDate()-i); dates.push(d.toISOString().split('T')[0]); }
-        const daily = {}; dates.forEach(d => daily[d] = { total:0,pending:0,processing:0,completed:0 });
-        orders.forEach(o => { const d = o.created_at?.split('T')[0]; if (daily[d]) { daily[d].total++; daily[d][o.status]++; } });
-        html = '<table><tr><th>日期</th><th>总</th><th>待</th><th>修</th><th>完</th></tr>';
-        dates.forEach(d => { const s = daily[d]; html += `<tr><td>${d}</td><td>${s.total}</td><td>${s.pending}</td><td>${s.processing}</td><td>${s.completed}</td></tr>`; });
-        document.getElementById('rptDaily').innerHTML = html + '</table>';
+        const dates=[]; for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dates.push(d.toISOString().split('T')[0]);}
+        const daily={}; dates.forEach(d=>daily[d]={total:0,repair:0,mold_change:0,pending:0,processing:0,completed:0});
+        orders.forEach(o=>{const d=o.created_at?.split('T')[0];if(daily[d]){daily[d].total++;daily[d][o.status]++;if(o.order_type==='mold_change')daily[d].mold_change++;else daily[d].repair++;}});
+        html='<table><tr><th>日期</th><th>总</th><th>设备维修</th><th>修模换款</th><th>待处理</th><th>维修中</th><th>已完成</th></tr>';
+        dates.forEach(d=>{const s=daily[d];html+=`<tr><td>${d.substring(5)}</td><td>${s.total}</td><td>${s.repair}</td><td>${s.mold_change}</td><td>${s.pending}</td><td>${s.processing}</td><td>${s.completed}</td></tr>`;});
+        document.getElementById('rptDaily').innerHTML=html+'</table>';
 
-        const workers = {}; orders.forEach(o => { if (o.assigned_to) { if (!workers[o.assigned_to]) workers[o.assigned_to] = { total:0,completed:0 }; workers[o.assigned_to].total++; if (o.status==='completed') workers[o.assigned_to].completed++; } });
-        html = '<table><tr><th>姓名</th><th>总</th><th>完</th></tr>';
-        Object.entries(workers).forEach(([n,s]) => html += `<tr><td>${n}</td><td>${s.total}</td><td>${s.completed}</td></tr>`);
-        document.getElementById('rptWorkers').innerHTML = Object.keys(workers).length ? html+'</table>' : '暂无数据';
+        const workers={}; orders.forEach(o=>{if(o.assigned_to){if(!workers[o.assigned_to])workers[o.assigned_to]={total:0,completed:0,repair:0,mold_change:0,totalHours:0};workers[o.assigned_to].total++;if(o.order_type==='mold_change')workers[o.assigned_to].mold_change++;else workers[o.assigned_to].repair++;if(o.status==='completed'){workers[o.assigned_to].completed++;if(o.completed_at&&o.dispatched_at)workers[o.assigned_to].totalHours+=(new Date(o.completed_at)-new Date(o.dispatched_at))/3600000;}}});
+        html='<table><tr><th>姓名</th><th>总工单</th><th>设备维修</th><th>修模换款</th><th>已完成</th><th>平均耗时(h)</th></tr>';
+        Object.entries(workers).forEach(([n,s])=>{const avg=s.completed>0?(s.totalHours/s.completed).toFixed(1):'-';html+=`<tr><td>${n}</td><td>${s.total}</td><td>${s.repair}</td><td>${s.mold_change}</td><td>${s.completed}</td><td>${avg}</td></tr>`;});
+        document.getElementById('rptWorkers').innerHTML=Object.keys(workers).length?html+'</table>':'暂无数据';
 
-        const statusLabels = { pending:'待处理', processing:'维修中', completed:'已完成' };
-        const typeLabels = { repair:'设备维修', mold_change:'修模换款' };
-        let detailHtml = '<table><thead><tr><th>编号</th><th>设备</th><th>描述</th><th>类型</th><th>状态</th><th>报修人</th><th>维修人</th><th>建立</th><th>派工</th><th>完工</th></tr></thead><tbody>';
-        orders.forEach(o => {
-            detailHtml += `<tr>
-                <td>${o.device_code||''}</td>
-                <td>${o.device_name||''}</td>
-                <td>${(o.desc||'').substring(0,12)}</td>
-                <td>${typeLabels[o.order_type]||''}</td>
-                <td><span class="tag tag-${o.status}">${statusLabels[o.status]}</span></td>
-                <td>${o.reporter||''}</td>
-                <td>${o.assigned_to||''}</td>
-                <td>${o.created_at?new Date(o.created_at).toLocaleDateString():''}</td>
-                <td>${o.dispatched_at?new Date(o.dispatched_at).toLocaleDateString():''}</td>
-                <td>${o.completed_at?new Date(o.completed_at).toLocaleDateString():''}</td>
-            </tr>`;
-        });
-        detailHtml += '</tbody></table>';
-        document.getElementById('rptAllOrders').innerHTML = detailHtml;
+        function fmt(iso){if(!iso)return'';const d=new Date(iso);return `${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
+        const stl={pending:'待处理',processing:'维修中',completed:'已完成'};
+        const tyl={repair:'设备维修',mold_change:'修模换款'};
+        let dh='<table><thead><tr><th>编号</th><th>设备</th><th>描述</th><th>类型</th><th>状态</th><th>报修人</th><th>维修人</th><th>建立</th><th>派工</th><th>完工</th></tr></thead><tbody>';
+        orders.forEach(o=>{dh+=`<tr><td>${o.device_code||''}</td><td>${o.device_name||''}</td><td>${(o.desc||'').substring(0,12)}</td><td>${tyl[o.order_type]||''}</td><td><span class="tag tag-${o.status}">${stl[o.status]}</span></td><td>${o.reporter||''}</td><td>${o.assigned_to||''}</td><td>${fmt(o.created_at)}</td><td>${fmt(o.dispatched_at)}</td><td>${fmt(o.completed_at)}</td></tr>`;});
+        dh+='</tbody></table>';
+        document.getElementById('rptAllOrders').innerHTML=dh;
     }
 
-    async function refreshAll() { await Promise.all([refreshHome(), renderOrders(), renderDevices()]); if (document.getElementById('page3').classList.contains('active')) renderReports(); }
-    window.onclick = function(e) { if (e.target.classList.contains('modal')) e.target.style.display = 'none'; };
-    (async function() {
-        await loadDevices();
-        await refreshAll();
-    })();
+    async function refreshAll(){await Promise.all([refreshHome(),renderOrders(),renderDevices()]);if(document.getElementById('page3').classList.contains('active'))renderReports();}
+    window.onclick=function(e){if(e.target.classList.contains('modal'))e.target.style.display='none';};
+    (async function(){await loadDevices();await refreshAll();})();
 </script>
 </body>
 </html>
