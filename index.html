@@ -295,10 +295,10 @@
         }
         .dropdown-item:hover { background: #f0f5ff; }
         .search-dropdown { position: relative; }
-        table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid #eee; }
-        th { background: #f9f9f9; font-weight: 600; }
-        .report-section { margin-bottom: 16px; }
+        table { width: 100%; border-collapse: collapse; font-size: 11px; }
+        th, td { padding: 6px 4px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f5f5f5; font-weight: 600; font-size: 11px; white-space: nowrap; }
+        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     </style>
 </head>
 <body>
@@ -354,6 +354,10 @@
             <div class="card"><strong>🔧 设备故障次数排名</strong><div id="rptFaults" style="margin-top:8px;"></div></div>
             <div class="card"><strong>📅 近7天工单趋势</strong><div id="rptDaily" style="margin-top:8px;"></div></div>
             <div class="card"><strong>👷 维修人员工作量</strong><div id="rptWorkers" style="margin-top:8px;"></div></div>
+            <div class="card">
+                <strong>📋 工单明细（全部）</strong>
+                <div class="table-wrap" id="rptAllOrders" style="margin-top:8px;"></div>
+            </div>
         </div>
     </div>
     <div class="nav">
@@ -375,7 +379,10 @@
             <div class="dropdown-list" id="deviceDropdown"></div>
         </div>
         <textarea class="form-textarea" id="repDesc" placeholder="详细描述故障现象..." rows="3"></textarea>
-        <select class="form-select" id="repUrgency"><option value="normal">普通</option><option value="urgent">紧急</option></select>
+        <select class="form-select" id="repUrgency">
+            <option value="normal">修模换款</option>
+            <option value="urgent">设备维修</option>
+        </select>
         <input class="form-input" id="repPerson" placeholder="报修人姓名">
         <div style="display:flex;gap:10px;">
             <button class="btn btn-outline" style="flex:1;" onclick="closeModal('reportModal')">取消</button>
@@ -404,7 +411,6 @@
 </div>
 
 <script>
-    // ====== Supabase 配置 ======
     const SUPABASE_URL = 'https://beqxeyqmlqvninfpvajy.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlcXhleXFtbHF2bmluZnB2YWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0NDc3MzQsImV4cCI6MjA5NDAyMzczNH0.25dZLSTu5jvmTB4Tx5XEIoAPMOwaUeoKriRJupSGxBk';
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -478,11 +484,10 @@
             return;
         }
         container.innerHTML = list.map(o => {
-            const cls = o.status + (isOvertime(o) ? ' overtime' : '');
-            const icons = { pending:'⏳', processing:'🔧', completed:'✅' };
             const labels = { pending:'待处理', processing:'维修中', completed:'已完成' };
             const otTag = isOvertime(o) ? '<span class="tag tag-overtime">⚠️ 超时</span>' : '';
-            const urgTag = o.urgency === 'urgent' ? '<span class="tag tag-urgent">紧急</span>' : '';
+            const urgLabel = o.urgency === 'urgent' ? '设备维修' : '修模换款';
+            const urgTag = `<span class="tag ${o.urgency==='urgent'?'tag-urgent':'tag-processing'}">${urgLabel}</span>`;
             const btn = o.status === 'pending' ? `<button class="btn btn-primary btn-sm" onclick="event.stopPropagation();assignOrder('${o.id}')">派工</button>` : o.status === 'processing' ? `<button class="btn btn-success btn-sm" onclick="event.stopPropagation();completeOrder('${o.id}')">完工</button>` : '';
             return `<div class="order-card ${o.status}${isOvertime(o)?' overtime':''}" onclick="openDetail('${o.id}')">
                 <div class="order-row">
@@ -515,9 +520,11 @@
         const { data: o } = await db.from('orders').select('*').eq('id', id).single();
         if (!o) return;
         const labels = { pending:'待处理', processing:'维修中', completed:'已完成' };
+        const urgLabel = o.urgency === 'urgent' ? '设备维修' : '修模换款';
         document.getElementById('detailContent').innerHTML = `
             <div class="modal-handle"></div>
             <div class="modal-title">📋 工单详情</div>
+            <p><b>类型：</b>${urgLabel}</p>
             <p><b>编号：</b>${o.device_code||'无'}</p>
             <p><b>部门：</b>${o.device_dept||'未指定'}</p>
             <p><b>设备：</b>${o.device_name}</p>
@@ -594,7 +601,6 @@
     async function renderReports() {
         await loadOrders(); await loadDevices();
         const faultCount = {}; orders.forEach(o => { if (o.status !== 'completed') faultCount[o.device_id] = (faultCount[o.device_id]||0)+1; });
-        const maxFault = Math.max(1, ...Object.values(faultCount));
         let html = '<table><tr><th>编号</th><th>设备</th><th>次数</th></tr>';
         devices.forEach(d => { const cnt = faultCount[d.id]||0; html += `<tr><td>${d.code}</td><td>${d.name}</td><td>${cnt}</td></tr>`; });
         document.getElementById('rptFaults').innerHTML = html + '</table>';
@@ -610,6 +616,26 @@
         html = '<table><tr><th>姓名</th><th>总</th><th>完</th></tr>';
         Object.entries(workers).forEach(([n,s]) => html += `<tr><td>${n}</td><td>${s.total}</td><td>${s.completed}</td></tr>`);
         document.getElementById('rptWorkers').innerHTML = Object.keys(workers).length ? html+'</table>' : '暂无数据';
+
+        const statusLabels = { pending:'待处理', processing:'维修中', completed:'已完成' };
+        const urgLabels = { urgent:'设备维修', normal:'修模换款' };
+        let detailHtml = '<table><thead><tr><th>编号</th><th>设备</th><th>描述</th><th>类型</th><th>状态</th><th>报修人</th><th>维修人</th><th>建立</th><th>派工</th><th>完工</th></tr></thead><tbody>';
+        orders.forEach(o => {
+            detailHtml += `<tr>
+                <td>${o.device_code||''}</td>
+                <td>${o.device_name||''}</td>
+                <td>${(o.desc||'').substring(0,12)}</td>
+                <td>${urgLabels[o.urgency]||''}</td>
+                <td><span class="tag tag-${o.status}">${statusLabels[o.status]}</span></td>
+                <td>${o.reporter||''}</td>
+                <td>${o.assigned_to||''}</td>
+                <td>${o.created_at?new Date(o.created_at).toLocaleDateString():''}</td>
+                <td>${o.dispatched_at?new Date(o.dispatched_at).toLocaleDateString():''}</td>
+                <td>${o.completed_at?new Date(o.completed_at).toLocaleDateString():''}</td>
+            </tr>`;
+        });
+        detailHtml += '</tbody></table>';
+        document.getElementById('rptAllOrders').innerHTML = detailHtml;
     }
 
     async function refreshAll() { await Promise.all([refreshHome(), renderOrders(), renderDevices()]); if (document.getElementById('page3').classList.contains('active')) renderReports(); }
