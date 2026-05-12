@@ -214,6 +214,8 @@
             font-size: 14px;
             background: #fff;
             outline: none;
+            width: 100%;
+            margin-bottom: 10px;
         }
         .modal {
             position: absolute;
@@ -255,6 +257,13 @@
             outline: none;
         }
         .form-input:focus, .form-textarea:focus { border-color: var(--primary); }
+        .form-label {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #333;
+            display: block;
+        }
         .toast {
             position: absolute;
             top: 70px;
@@ -373,16 +382,21 @@
     <div class="modal-content">
         <div class="modal-handle"></div>
         <div class="modal-title">📝 设备报修</div>
+        
+        <label class="form-label">工单类型</label>
+        <select class="form-select" id="repOrderType">
+            <option value="repair">设备维修</option>
+            <option value="mold_change">修模换款</option>
+        </select>
+
+        <label class="form-label">选择设备</label>
         <div class="search-dropdown">
             <input type="text" class="form-input" id="repDeviceSearch" placeholder="🔍 输入编号或名称搜索设备..." autocomplete="off" oninput="filterDeviceList()" onfocus="showDeviceDropdown()">
             <input type="hidden" id="repDeviceCode">
             <div class="dropdown-list" id="deviceDropdown"></div>
         </div>
+
         <textarea class="form-textarea" id="repDesc" placeholder="详细描述故障现象..." rows="3"></textarea>
-        <select class="form-select" id="repUrgency">
-            <option value="normal">修模换款</option>
-            <option value="urgent">设备维修</option>
-        </select>
         <input class="form-input" id="repPerson" placeholder="报修人姓名">
         <div style="display:flex;gap:10px;">
             <button class="btn btn-outline" style="flex:1;" onclick="closeModal('reportModal')">取消</button>
@@ -486,14 +500,15 @@
         container.innerHTML = list.map(o => {
             const labels = { pending:'待处理', processing:'维修中', completed:'已完成' };
             const otTag = isOvertime(o) ? '<span class="tag tag-overtime">⚠️ 超时</span>' : '';
-            const urgLabel = o.urgency === 'urgent' ? '设备维修' : '修模换款';
-            const urgTag = `<span class="tag ${o.urgency==='urgent'?'tag-urgent':'tag-processing'}">${urgLabel}</span>`;
+            const typeLabel = o.order_type === 'mold_change' ? '修模换款' : '设备维修';
+            const typeTag = `<span class="tag ${o.order_type==='mold_change'?'tag-processing':'tag-urgent'}">${typeLabel}</span>`;
             const btn = o.status === 'pending' ? `<button class="btn btn-primary btn-sm" onclick="event.stopPropagation();assignOrder('${o.id}')">派工</button>` : o.status === 'processing' ? `<button class="btn btn-success btn-sm" onclick="event.stopPropagation();completeOrder('${o.id}')">完工</button>` : '';
             return `<div class="order-card ${o.status}${isOvertime(o)?' overtime':''}" onclick="openDetail('${o.id}')">
                 <div class="order-row">
                     <span class="tag tag-${o.status}">${labels[o.status]}</span>
+                    ${typeTag}
                     <span class="code">${o.device_code||''}</span>
-                    <span class="name">${o.device_name} ${urgTag} ${otTag}</span>
+                    <span class="name">${o.device_name} ${otTag}</span>
                 </div>
                 <div class="order-meta">📝 ${(o.desc||'').substring(0,25)}</div>
                 <div class="order-meta">👤 ${o.reporter||''} ${o.assigned_to?'→ 🔧 '+o.assigned_to:''}</div>
@@ -520,11 +535,11 @@
         const { data: o } = await db.from('orders').select('*').eq('id', id).single();
         if (!o) return;
         const labels = { pending:'待处理', processing:'维修中', completed:'已完成' };
-        const urgLabel = o.urgency === 'urgent' ? '设备维修' : '修模换款';
+        const typeLabel = o.order_type === 'mold_change' ? '修模换款' : '设备维修';
         document.getElementById('detailContent').innerHTML = `
             <div class="modal-handle"></div>
             <div class="modal-title">📋 工单详情</div>
-            <p><b>类型：</b>${urgLabel}</p>
+            <p><b>工单类型：</b>${typeLabel}</p>
             <p><b>编号：</b>${o.device_code||'无'}</p>
             <p><b>部门：</b>${o.device_dept||'未指定'}</p>
             <p><b>设备：</b>${o.device_name}</p>
@@ -544,6 +559,7 @@
 
     async function openReportModal() {
         await loadDevices();
+        document.getElementById('repOrderType').value = 'repair';
         document.getElementById('repDeviceSearch').value = '';
         document.getElementById('repDeviceCode').value = '';
         document.getElementById('repDesc').value = '';
@@ -568,14 +584,17 @@
         if (!e.target.closest('.search-dropdown')) document.getElementById('deviceDropdown').classList.remove('show');
     });
     async function submitReport() {
+        const orderType = document.getElementById('repOrderType').value;
         const devCode = document.getElementById('repDeviceCode').value;
         const desc = document.getElementById('repDesc').value.trim();
-        const urgency = document.getElementById('repUrgency').value;
         const reporter = document.getElementById('repPerson').value.trim() || '匿名';
         if (!devCode || !desc) return showToast('请完善信息');
         const dev = devices.find(d => d.code === devCode);
         if (!dev) return showToast('未找到该设备');
-        await db.from('orders').insert({ device_id:dev.id, device_name:dev.name, device_code:dev.code, device_dept:dev.dept, desc, urgency, status:'pending', reporter, created_at:new Date().toISOString() });
+        await db.from('orders').insert({ 
+            device_id:dev.id, device_name:dev.name, device_code:dev.code, device_dept:dev.dept, 
+            desc, order_type: orderType, status:'pending', reporter, created_at:new Date().toISOString() 
+        });
         await db.from('devices').update({ status:'fault' }).eq('id', dev.id);
         closeModal('reportModal'); refreshAll(); showToast('报修已提交');
     }
@@ -618,14 +637,14 @@
         document.getElementById('rptWorkers').innerHTML = Object.keys(workers).length ? html+'</table>' : '暂无数据';
 
         const statusLabels = { pending:'待处理', processing:'维修中', completed:'已完成' };
-        const urgLabels = { urgent:'设备维修', normal:'修模换款' };
+        const typeLabels = { repair:'设备维修', mold_change:'修模换款' };
         let detailHtml = '<table><thead><tr><th>编号</th><th>设备</th><th>描述</th><th>类型</th><th>状态</th><th>报修人</th><th>维修人</th><th>建立</th><th>派工</th><th>完工</th></tr></thead><tbody>';
         orders.forEach(o => {
             detailHtml += `<tr>
                 <td>${o.device_code||''}</td>
                 <td>${o.device_name||''}</td>
                 <td>${(o.desc||'').substring(0,12)}</td>
-                <td>${urgLabels[o.urgency]||''}</td>
+                <td>${typeLabels[o.order_type]||''}</td>
                 <td><span class="tag tag-${o.status}">${statusLabels[o.status]}</span></td>
                 <td>${o.reporter||''}</td>
                 <td>${o.assigned_to||''}</td>
